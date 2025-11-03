@@ -26,13 +26,13 @@ const removeButton1 = () => {
 const removeButton2 = () => {
     const button = Array.from(window.document.querySelectorAll('span')).find(element => element.textContent.endsWith('をブロック'));
     if (button) {
-        button.addEventListener('mousedown', () => {
-            button.remove();
-        });
-        button.addEventListener('keydown', () => {
-            button.remove();
-        });
-        button.remove();
+        const parent = button.parentElement;
+        const message = button.cloneNode();
+        message.textContent = '[スパム報告は禁止です]';
+        message.style.paddingLeft = '1em';
+        message.style.color = '#ccc';
+        message.style.fontSize = '0.8em';
+        parent.replaceChild(message, button);
     }
 };
 const removeButton3 = () => {
@@ -50,18 +50,16 @@ const removeButton3 = () => {
 const removeButton4 = () => {
     const button = Array.from(window.document.querySelectorAll('span')).find(element => element.textContent === 'フィッシングを報告');
     if (button) {
-        const parent = button.parentElement;
-        const message = button.cloneNode();
-        message.textContent = '[スパム報告は禁止です]';
-        message.style.paddingLeft = '1em';
-        message.style.color = '#ccc';
-        message.style.fontSize = '0.8em';
-        parent.replaceChild(message, button);
+        button.addEventListener('mousedown', () => {
+            button.remove();
+        });
+        button.addEventListener('keydown', () => {
+            button.remove();
+        });
+        button.remove();
     }
 };
-window.addEventListener('load', () => {
-    setInterval(removeButton1, 100);
-    setInterval(removeButton2, 100);
-    setInterval(removeButton3, 100);
-    setInterval(removeButton4, 100);
-});
+setInterval(removeButton1, 100);
+setInterval(removeButton2, 150);
+setInterval(removeButton3, 200);
+setInterval(removeButton4, 250);
