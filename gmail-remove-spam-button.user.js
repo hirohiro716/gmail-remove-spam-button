@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gmail Remove Spam Button
 // @namespace    https://github.com/hirohiro716/
-// @version      1.0
+// @version      1.1
 // @description  Remove the spam email report button.
 // @author       hiro
 // @match        https://mail.google.com/mail/*
@@ -24,6 +24,18 @@ const removeButton1 = () => {
     }
 };
 const removeButton2 = () => {
+    const button = Array.from(window.document.querySelectorAll('button')).find(element => element.textContent === '迷惑メールを報告');
+    if (button) {
+        button.addEventListener('mousedown', () => {
+            button.remove();
+        });
+        button.addEventListener('keydown', () => {
+            button.remove();
+        });
+        button.remove();
+    }
+};
+const removeButton3 = () => {
     const button = Array.from(window.document.querySelectorAll('span')).find(element => element.textContent.endsWith('をブロック'));
     if (button) {
         const parent = button.parentElement;
@@ -35,7 +47,7 @@ const removeButton2 = () => {
         parent.replaceChild(message, button);
     }
 };
-const removeButton3 = () => {
+const removeButton4 = () => {
     const button = Array.from(window.document.querySelectorAll('span')).find(element => element.textContent === 'スパムとして報告');
     if (button) {
         button.addEventListener('mousedown', () => {
@@ -47,7 +59,7 @@ const removeButton3 = () => {
         button.remove();
     }
 };
-const removeButton4 = () => {
+const removeButton5 = () => {
     const button = Array.from(window.document.querySelectorAll('span')).find(element => element.textContent === 'フィッシングを報告');
     if (button) {
         button.addEventListener('mousedown', () => {
@@ -60,6 +72,7 @@ const removeButton4 = () => {
     }
 };
 setInterval(removeButton1, 100);
-setInterval(removeButton2, 150);
-setInterval(removeButton3, 200);
-setInterval(removeButton4, 250);
+setInterval(removeButton2, 100);
+setInterval(removeButton3, 150);
+setInterval(removeButton4, 200);
+setInterval(removeButton5, 250);
